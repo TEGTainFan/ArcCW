@@ -36,7 +36,7 @@ hook.Add("TTTBodySearchPopulate", "ArcCW_PopulateHUD", function(processed, raw)
     -- Attachment Info
     local mode = GetConVar("arccw_ttt_bodyattinfo"):GetInt()
     local attTbl = ArcCW.TTT_AttInfo[raw.eidx]
-    if attTbl and !table.IsEmpty(attTbl) and (mode == 2 or (mode == 1 and raw.detective_search)) then
+    if attTbl and table.Count(attTbl) > 0 and (mode == 2 or (mode == 1 and raw.detective_search)) then
         local finalTbl = {
             img    = "arccw/ttticons/arccw_dropattinfo.png",
             p = 10.5, -- Right after the murder weapon
@@ -338,9 +338,11 @@ function ArcCW.TTT2_PopulateSettings(parent, title, tbl)
     end
 end
 
--- In almost all cases TTT2 lang names are identical to ISO 639-1; except for simplified / traditional Chinese
+-- In almost all cases TTT2 lang names are identical to ISO 639-1; except for simplified / traditional Chinese and Portuguese
 local ttt_langtranslate = {
     ["zh-cn"] = "zh_hans", -- i find it funny the original ttt's lang name for this is "simpchinese". haha simp
+    ["ko"] = "en", -- Korean has not been added yet
+    ["pt-br"] = "pt_br",
     ["zh-tw"] = "zh_tw",
 }
 
